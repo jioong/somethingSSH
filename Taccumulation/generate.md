@@ -23,4 +23,4 @@
   
 **生成Eclipse项目**  
   
-		`mvn eclipse:eclipse`
+		`mvn eclipse:eclipse`  
