@@ -64,3 +64,31 @@ public void setName( String name){
 
 ## 实现动作 ##
   
+基本上，如果愿意，任何类都可以作为一个动作。只需要提供一个工作被执行时框架调用的入口方法。  
+  
+> *Struts2* 动作不必实现 *Action* 接口。任何对象都可以通过实现一个返回控制字符串的 *execute()* 方法来非正式地实现动作与框架之间的契约。  
+
+### 可选的 Action 接口 ###
+  
+框架没有对动作强加很多正式的要求，但是它确实提供了一个可以选择实现的接口。实现 *Action* 接口的成本很小，并且带来了一些方便。  
+大部分的动作会实现 *com.opensymphony.xwork2.Action* 接口，该接口只定义了一个方法：  
+```Java
+	String execute() throws Exception
+```    
+
+由于框架没有任何类型要求，所以可以不实现该接口，而把这个方法直接放在类中。 *Action* 接口同时也提供了一些有用的 *String* 常量，这些常量可以作为返回值来选择合适的结果。 *Action* 接口定义的常量为：  
+```Java
+public static final String ERROR   "error"
+public static final String INPUT   "input"
+public static final String LOGIN   "login"
+public static final String NONE    "none"
+public static final String SUCCESS "success"
+```
+  
+这些常量可以很方便的用作 *execute()* 方法返回的控制字符串的值。真正的好处是框架内部也是用了这些常量，这意味着使用这些预定义的控制字符串允许接入更多的智能默认行为。  
+  
+### ActionSupport 类 ###
+  
+它提供了 *Action* 接口和其他几个有用接口的默认实现的便利类，提供了注入数据验证、错误消息本地化等功能。  
+  
+**1. 基本验证**  
